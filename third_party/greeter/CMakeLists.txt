@@ -12,3 +12,12 @@ add_library(Greeter SHARED ${SOURCES})
 target_link_libraries(Greeter PUBLIC fmt::fmt)
 target_include_directories(Greeter PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>)
 add_library(Greeter::Greeter ALIAS Greeter)
+
+install(TARGETS Greeter
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/greeter
+    FILES_MATCHING PATTERN "*.h"
+)
